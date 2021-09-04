@@ -1,22 +1,26 @@
 import Task from './Task';
 
 const TodoList = (props) => {
-  const { todo } = props;
-  console.log(JSON.stringify(todo));
+  const {
+    todos,
+    onChangeTodoText,
+    onClickToggleComplete,
+    onClickToggleEditMode,
+    onClickDeleteTodo,
+  } = props;
+
+  // console.log(`TodoListsに渡ってきたtodosの中身${JSON.stringify(todos)}`);
+
   return (
     <>
-      <ul class='p-todoList js-todo_list'>
-        {todo.map((data, index) => {
-          return (
-            <Task
-              key={index}
-              id={data.id}
-              name={data.text}
-              editMode={data.editMode}
-              isComplete={data.isComplete}
-            />
-          );
-        })}
+      <ul className='p-todoList js-todo_list'>
+        <Task
+          todos={todos}
+          onChangeTodoText={onChangeTodoText}
+          onClickToggleComplete={onClickToggleComplete}
+          onClickToggleEditMode={onClickToggleEditMode}
+          onClickDeleteTodo={onClickDeleteTodo}
+        />
       </ul>
     </>
   );
