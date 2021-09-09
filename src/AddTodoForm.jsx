@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import escapeStringRegexp from 'escape-string-regexp';
 
 const AddTodoForm = (props) => {
   const { onClickAddTodo } = props;
@@ -8,7 +9,9 @@ const AddTodoForm = (props) => {
 
   const onChangeTodoText = (event) => {
     event.stopPropagation();
-    setText(event.target.value);
+
+    const escapedText = escapeStringRegexp(event.target.value);
+    setText(escapedText);
   };
 
   const handleAddTodo = (event) => {

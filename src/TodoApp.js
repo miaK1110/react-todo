@@ -23,13 +23,15 @@ const TodoApp = () => {
     },
   ]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [searchText, setSearchText] = useState('');
+
+  const handleReload = (event) => {
+    event.preventDefault();
   };
 
   const onClickAddTodo = (event, text) => {
     // console.log(`入力された値：${text}`);
-    handleSubmit(event);
+    handleReload(event);
 
     const newTodoItem = {
       text: text,
@@ -43,10 +45,24 @@ const TodoApp = () => {
     setTodos(newTodo);
   };
 
-  const onClickToggleComplete = (event) => {
-    alert(event);
-    handleSubmit(event);
-    setTodos({ isComplete: true });
+  // searchText from Search.js
+  const searchTodos = (searchText) => {
+    setSearchText(searchText);
+  };
+
+  const filterCollection = (elm) => {
+    const regexp = new RegExp('^' + searchText, 'i');
+    return elm.text.match(regexp);
+  };
+
+  const filteredList = searchText ? todos.filter(filterCollection) : todos;
+
+  const onClickToggleComplete = (index) => {
+    // alert(index);
+    // handleReload();
+    const newTodo = [...todos];
+    setTodos(newTodo);
+    // setTodos({ isComplete: true });
   };
 
   const onClickToggleEditMode = (index) => {
@@ -64,9 +80,10 @@ const TodoApp = () => {
     <div className='l-main App'>
       <Header />
       <AddTodoForm onClickAddTodo={onClickAddTodo} />
-      <SearchForm todos={todos} />
+      <SearchForm todos={filteredList} searchTodos={searchTodos} />
       <TodoList
-        todos={todos}
+        todos={filteredList}
+        // searchMode={searchMode}
         onClickToggleComplete={onClickToggleComplete}
         onClickToggleEditMode={onClickToggleEditMode}
         onClickDeleteTodo={onClickDeleteTodo}

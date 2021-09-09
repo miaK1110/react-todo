@@ -13,7 +13,7 @@ const TodoList = (props) => {
 
   return (
     <>
-      <ul className='p-todoList js-todo_list'>
+      <ul className='p-todoList'>
         <Task
           todos={todos}
           onChangeTodoText={onChangeTodoText}

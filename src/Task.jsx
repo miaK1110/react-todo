@@ -39,7 +39,7 @@ const Task = (props) => {
                   : 'c-icon p-listItem__iconTick far fa-check-circle'
               }
               aria-hidden='true'
-              onClick={onClickToggleComplete}
+              onClick={() => onClickToggleComplete(index)}
             ></i>
             {input}
             <i
