@@ -4,7 +4,7 @@ const Header = () => {
       <header className='l-header'>
         <div className='p-header'>
           <h1 className='p-header__title'>React TODO</h1>
-          {/* <span className='p-header__emoji'> &#x1F984;</span> */}
+          <span className='p-header__emoji'> &#129412;</span>
         </div>
       </header>
     </>

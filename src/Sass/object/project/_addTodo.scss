@@ -1,0 +1,33 @@
+@import '../../foundation/variable';
+
+.p-addTodo {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  &__inputArea {
+    padding-top: 2rem;
+    width: 100%;
+  }
+
+  &__inputText {
+    width: 100%;
+    padding: 5px;
+    height: 40px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    border: 1px solid $borderColor;
+  }
+
+  &__btn {
+    background: $btnColor;
+    color: $fontColor-sub;
+    margin-top: 1.3rem;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-bottom: 1.5rem;
+  }
+}

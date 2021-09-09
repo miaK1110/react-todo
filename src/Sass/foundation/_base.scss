@@ -1,0 +1,10 @@
+@import './variable';
+
+body {
+  background: $bgColor;
+  color: $fontColor;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  width: 100%;
+  box-sizing: border-box;
+}
