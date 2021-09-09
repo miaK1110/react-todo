@@ -1,23 +1,27 @@
-import Sass from './style.scss';
+import './style.scss';
 import Header from './Header';
 import AddTodoForm from './AddTodoForm';
 import SearchForm from './SearchForm';
 import TodoList from './TodoList';
 import { useState } from 'react';
+import uniqid from 'uniqid';
 
 const TodoApp = () => {
   const [todos, setTodos] = useState([
     {
+      id: uniqid(),
       text: 'Click todo to edit',
       editMode: false,
       isComplete: false,
     },
     {
+      id: uniqid(),
       text: 'Tick the todo to set to done',
       editMode: false,
       isComplete: false,
     },
     {
+      id: uniqid(),
       text: 'Click bin to delete todo',
       editMode: false,
       isComplete: false,
@@ -35,6 +39,7 @@ const TodoApp = () => {
     handleReload(event);
 
     const newTodoItem = {
+      id: uniqid(),
       text: text,
       editMode: false,
       isComplete: false,
@@ -46,7 +51,6 @@ const TodoApp = () => {
     setTodos(newTodo);
   };
 
-  // searchText from Search.js
   const searchTodos = (searchText) => {
     setSearchText(searchText);
   };
@@ -59,22 +63,37 @@ const TodoApp = () => {
   const filteredList = searchText ? todos.filter(filterCollection) : todos;
 
   const onClickToggleComplete = (index) => {
-    // alert(index);
-    // handleReload();
-    const newTodo = [...todos];
-    setTodos(newTodo);
-    // setTodos({ isComplete: true });
+    const newTodos = todos.map((todo, i) => ({
+      ...todo,
+      isComplete: i === index ? !todo.isComplete : todo.isComplete,
+    }));
+    setTodos(newTodos);
   };
 
   const onClickToggleEditMode = (index) => {
-    setTodos({ editMode: true });
+    const newTodos = todos.map((todo, i) => ({
+      ...todo,
+      editMode: i === index ? !todo.editMode : todo.editMode,
+    }));
+    setTodos(newTodos);
   };
 
   const onClickDeleteTodo = (index) => {
     console.log(JSON.stringify(index));
-    const newTodo = [...todos];
-    newTodo.splice(index, 1);
-    setTodos(newTodo);
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  };
+
+  const closeEditMode = (index, editText) => {
+    // console.log(`editTextの中身：${editText}`);
+    // console.log(`indexの中身：${index}`);
+    const newTodos = todos.map((todo, i) => ({
+      ...todo,
+      text: i === index ? editText : todo.text,
+      editMode: i === index ? !todo.editMode : todo.editMode,
+    }));
+    setTodos(newTodos);
   };
 
   return (
@@ -84,9 +103,9 @@ const TodoApp = () => {
       <SearchForm todos={filteredList} searchTodos={searchTodos} />
       <TodoList
         todos={filteredList}
-        // searchMode={searchMode}
         onClickToggleComplete={onClickToggleComplete}
         onClickToggleEditMode={onClickToggleEditMode}
+        closeEditMode={closeEditMode}
         onClickDeleteTodo={onClickDeleteTodo}
       />
     </div>

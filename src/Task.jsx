@@ -1,25 +1,44 @@
+import { useState } from 'react';
+import escapeStringRegexp from 'escape-string-regexp';
+
 const Task = (props) => {
   const {
     todos,
-    onChangeTodoText,
     onClickToggleComplete,
     onClickToggleEditMode,
+    closeEditMode,
     onClickDeleteTodo,
   } = props;
 
   // console.log(`Taskコンポーネントに渡ってきたtodos${JSON.stringify(todos)}`);
 
+  const [editText, setEditText] = useState('');
+
+  const onChangeEditTodoText = (event) => {
+    event.stopPropagation();
+    const escapedText = escapeStringRegexp(event.currentTarget.value);
+    setEditText(escapedText);
+  };
+
+  const handleKeyUpCloseEdit = (e, index) => {
+    console.log(`e:${e}`);
+    if (e.which === 13) {
+      closeEditMode(index, editText);
+    }
+  };
+
   return (
     <>
       {todos.map(function (todo, index) {
-        console.log(todo);
+        // console.log(todo);
         const todoText = todo.text;
         const input = todo.editMode ? (
           <input
             type='text'
-            className='p-listItem__editText js-todo_list-editForm'
-            value={todoText}
-            onChange={() => onChangeTodoText(index)}
+            className='p-listItem__editText'
+            value={editText}
+            onChange={onChangeEditTodoText}
+            onKeyUp={(e) => handleKeyUpCloseEdit(e, index)}
           />
         ) : (
           <span
@@ -31,7 +50,10 @@ const Task = (props) => {
         );
 
         return (
-          <li key={index} className='p-listItem js-todo_list-item'>
+          <li
+            key={todo.id}
+            className={todo.isComplete ? 'p-listItem--done' : 'p-listItem'}
+          >
             <i
               className={
                 todo.isComplete

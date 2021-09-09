@@ -6,6 +6,7 @@ const TodoList = (props) => {
     onChangeTodoText,
     onClickToggleComplete,
     onClickToggleEditMode,
+    closeEditMode,
     onClickDeleteTodo,
   } = props;
 
@@ -19,6 +20,7 @@ const TodoList = (props) => {
           onChangeTodoText={onChangeTodoText}
           onClickToggleComplete={onClickToggleComplete}
           onClickToggleEditMode={onClickToggleEditMode}
+          closeEditMode={closeEditMode}
           onClickDeleteTodo={onClickDeleteTodo}
         />
       </ul>

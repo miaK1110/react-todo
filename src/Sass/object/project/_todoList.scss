@@ -37,7 +37,6 @@
     }
 
     &__editText {
-      display: none;
       width: 80%;
       height: 100%;
       border: none;
@@ -49,10 +48,13 @@
   .p-listItem--done {
     background: $bgColor-sub;
     color: #888;
+    overflow: hidden;
+    padding: 15px 15px;
+    border-bottom: 1px solid $borderColor;
+    transition: 0.5s transform;
   }
 
   &__editText--done {
-    display: none;
     height: 100%;
     border: none;
     padding: 5px 10px;
