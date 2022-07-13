@@ -1,0 +1,19 @@
+.c-tag {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  &__item {
+    border: 1px solid $borderColor;
+    border-radius: 2px;
+    padding: 8px 8px;
+    cursor: pointer;
+    &:hover {
+      background-color: $fontColor;
+      color: $fontColor-sub;
+    }
+  }
+  &__wrapper {
+    color: $fontColor;
+    text-decoration: none;
+  }
+}
